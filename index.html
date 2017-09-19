@@ -12,24 +12,30 @@ var svg = d3.select("body") // Select the body element
     .append("svg")          // Append an SVG element to the body
     .attr("width", 960)     // make it 960 pixels wide
     .attr("height", 500)    // make it 500 pixels high
-    .append("circle")       // append a cicle to the svg
-    .attr("fill", "blue")   // fill the circle with 'blue'
-    .attr("r", 20)          // set the radius to 10 pixels
-    .attr('cx', 40)         // position the circle at 40 on the x axis
-    .attr('cy', 250)        // position the circle at 250 on the y axis
-    // 1st transition  
-    .transition()           // apply a transition
-    .ease(d3.easeLinear)    // control the speed of the transition
-    .duration(4000)         // apply it over 4000 milliseconds
-    .attr('cx', 920)        // new horizontal position at 920 on x axis
-    // 2nd transition
-    .transition()           // apply a transition
-    .duration(4000)         // apply it over 4000 milliseconds
-    .attr('r', 40)          // new radius of 40 pixels
-    // 3rd transition
-    .transition()           // apply a transition
-    .duration(4000)         // apply it over 4000 milliseconds
-    .style('fill', "red");  // new colour red
+    
+function circleTransition() { 
+
+    var timeCircle = svg.append("circle")
+        .attr("fill", "steelblue")
+        .attr("r", 20);
+    repeat();
+    
+    function repeat() {
+      timeCircle
+        .attr('cx', 40)      // position the circle at 40 on the x axis
+        .attr('cy', 250)     // position the circle at 250 on the y axis
+        .transition()        // apply a transition
+        .duration(2000)      // apply it over 2000 milliseconds
+        .attr('cx', 920)     // move the circle to 920 on the x axis
+        .transition()        // apply a transition
+        .duration(2000)      // apply it over 2000 milliseconds
+        .attr('cx', 40)      // return the circle to 40 on the x axis
+        .on("end", repeat);  // when the transition finishes start again
+    };
+
+};
+
+circleTransition();
 
 </script>
 </body>
