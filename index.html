@@ -5,37 +5,39 @@
 
 <!-- load the d3.js library -->    
 <script src="https://d3js.org/d3.v4.min.js"></script>
-
+<div id="viz"></div>
 <script>
 
-var svg = d3.select("body") // Select the body element
+var svg = d3.select("#viz") // Select the body element
     .append("svg")          // Append an SVG element to the body
     .attr("width", 960)     // make it 960 pixels wide
     .attr("height", 500)    // make it 500 pixels high
     
-function circleTransition() { 
+svg.append("circle")
+    .style("stroke", "gray")
+    .style("fill", "white")
+    .attr("r", 40)
+    .attr("cx", 50)
+    .attr("cy", 50)
+    .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+    .on("mouseout", function(){d3.select(this).style("fill", "white");})
+    .on("mousedown", animateFirstStep);
 
-    var timeCircle = svg.append("circle")
-        .attr("fill", "steelblue")
-        .attr("r", 20);
-    repeat();
-    
-    function repeat() {
-      timeCircle
-        .attr('cx', 40)      // position the circle at 40 on the x axis
-        .attr('cy', 250)     // position the circle at 250 on the y axis
-        .transition()        // apply a transition
-        .duration(2000)      // apply it over 2000 milliseconds
-        .attr('cx', 920)     // move the circle to 920 on the x axis
-        .transition()        // apply a transition
-        .duration(2000)      // apply it over 2000 milliseconds
-        .attr('cx', 40)      // return the circle to 40 on the x axis
-        .on("end", repeat);  // when the transition finishes start again
-    };
-
+function animateFirstStep(){
+    d3.select(this)
+      .transition()            
+        .delay(0)            
+        .duration(1000)
+        .attr("r", 10)
+        .on("end", animateSecondStep);
 };
 
-circleTransition();
+function animateSecondStep(){
+    d3.select(this)
+      .transition()
+        .duration(1000)
+        .attr("r", 40);
+};
 
 </script>
 </body>
