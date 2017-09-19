@@ -19,7 +19,9 @@ var svg = d3.select("body") // Select the body element
     .attr('cy', 250)        // position the circle at 250 on the y axis
     .transition()           // apply a transition
     .duration(4000)         // apply it over 4000 milliseconds
-    .attr('cx', 920);       // new horizontal position at 920 on x axis
+    .attr('cx', 920)        // new horizontal position at 920 on x axis
+    .attr('r', 40)          // new radius of 40 pixels
+    .style('fill', "red");  // new colour red
 
 </script>
 </body>
