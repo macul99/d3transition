@@ -19,6 +19,7 @@ var svg = d3.select("body") // Select the body element
     .attr('cy', 250)        // position the circle at 250 on the y axis
     // 1st transition  
     .transition()           // apply a transition
+    .ease(d3.easeLinear)    // control the speed of the transition
     .duration(4000)         // apply it over 4000 milliseconds
     .attr('cx', 920)        // new horizontal position at 920 on x axis
     // 2nd transition
